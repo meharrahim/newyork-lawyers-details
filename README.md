@@ -1,2 +1,2 @@
 # newyork-lawyers-details
-This repository is to EXTRACT ALL LAWYERS DETAILS IN NEWYORK FROM THE FOLLOWING START URL : http://www.avvo.com/all-lawyers/ny/new_york.html 
+This repository is to extract the details of all lawyers in Newyork from the url: http://www.avvo.com/all-lawyers/ny/new_york.html 
