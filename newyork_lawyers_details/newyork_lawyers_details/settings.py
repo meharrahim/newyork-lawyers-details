@@ -14,9 +14,10 @@ BOT_NAME = 'newyork_lawyers_details'
 SPIDER_MODULES = ['newyork_lawyers_details.spiders']
 NEWSPIDER_MODULE = 'newyork_lawyers_details.spiders'
 
-
+FEED_URI = 'data/%(name)s/%(time)s.json'
+FEED_FORMAT = 'json'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'newyork_lawyers_details (+http://www.yourdomain.com)'
+USER_AGENT = 'newyork_lawyers_details (+https://www.avvo.com/)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
