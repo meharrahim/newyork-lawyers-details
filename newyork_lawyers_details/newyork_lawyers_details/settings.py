@@ -17,8 +17,21 @@ NEWSPIDER_MODULE = 'newyork_lawyers_details.spiders'
 FEED_URI = 'data/%(name)s/%(time)s.json'
 FEED_FORMAT = 'json'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'newyork_lawyers_details (+https://www.avvo.com/)'
 
+
+USER_AGENTS = [
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/57.0.2987.110 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Linux x86_64) '
+     'AppleWebKit/537.36 (KHTML, like Gecko) '
+     'Chrome/61.0.3163.79 '
+     'Safari/537.36'),  # chrome
+    ('Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:55.0) '
+     'Gecko/20100101 '
+     'Firefox/55.0')  # firefox
+]
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
@@ -28,13 +41,13 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -53,9 +66,13 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'newyork_lawyers_details.middlewares.NewyorkLawyersDetailsDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'newyork_lawyers_details.middlewares.NewyorkLawyersDetailsDownloaderMiddleware': 543,
+}
+DOWNLOADER_MIDDLEWARES.update({
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_useragents.downloadermiddlewares.useragents.UserAgentsMiddleware': 500,
+})
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
