@@ -11,7 +11,7 @@ import scrapy
 class NewyorkLawyersDetailsItem(scrapy.Item):
     # define the fields for your item here like:
     name = scrapy.Field()
-    licence = scrapy.Field()
+    license = scrapy.Field()
     image = scrapy.Field()
     avvo_rating = scrapy.Field()
     client_rating = scrapy.Field()
