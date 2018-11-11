@@ -45,11 +45,15 @@ class AvvoSpider(scrapy.Spider):
         print("\n\n\n ..................",item["name"] )
 
         # area
-        practice_areas = response.xpath("//*[@id='practice_areas']/div/div[2]/ol/li/a/text()").extract()
+        practice_areas = response.xpath("//*[@id='practice_areas']/div/div[2]/ol/li/a/text() | //*[@id='js-chart-legend-hidden']/li[*]/a/text()").extract()
+        if practice_areas[-1] == 'More\xa0':
+            practice_areas.pop()
+        practice_areas_dict = [practice_area.split(':\xa0')[0] for practice_area in practice_areas]
+        item["practice_areas"] = practice_areas_dict
+
+        print(item["practice_areas"])
+
         
-        print("\n\n\n\n\n\n\n @@@@@@@@@@@@@@@@@@@@@",practice_areas)
-
-
         # year of license
 
         item["license"] = response.xpath("//time[@data-timestupletamp='years-active']/text()").extract_first()
@@ -108,4 +112,5 @@ class AvvoSpider(scrapy.Spider):
         item["url"] = response.url
 
         yield item
+        
 
